@@ -18,10 +18,12 @@ pub struct Gateway {
     event_handlers: Arc<Mutex<HashMap<String, Vec<EventHandler>>>>,
 }
 
+
 impl Gateway {
     pub async fn connect(token: &str) -> Self {
+        let ws_url = "wss://gateway.discord.gg/?v=10&encoding=json".to_string();
         let (tx, rx) = mpsc::unbounded_channel();
-        let (ws_stream, _) = connect_async("wss://gateway.discord.gg/?v=10&encoding=json").await.expect("Failed to connect");
+        let (ws_stream, _) = connect_async(ws_url).await.expect("Failed to connect");
 
         let (_, read) = ws_stream.split();
 
@@ -33,8 +35,6 @@ impl Gateway {
                 }
             }
         }));
-
-        let ws_url = format!("{}?v=10&encoding=json", "wss://gateway.discord.gg");
 
         Gateway {
             ws_url,
