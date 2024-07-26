@@ -1,0 +1,15 @@
+[package]
+name = "starbust"
+description = "a discord api wrapper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12.5", features = ["json"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+twilight-model = "0.16.0-rc.1"
+tokio-tungstenite = "0.23.1"
+tokio-stream = "0.1"
+futures-util = "0.3.30"
